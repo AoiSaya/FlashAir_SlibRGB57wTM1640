@@ -22,31 +22,37 @@ local SlibRGB57wTM1640 = {
 }
 
 --[Low layer functions]--
-function SlibRGB57wTM1640:writeCmd(data, ...)
-local tbl = (type(data)=="table") and data or {data, ...}
+function SlibRGB57wTM1640:writeCmd(data,gpio)
+local tbl  = (type(data)=="table") and data or {data}
+gpio = gpio or self.gpio
+self.gpio = gpio
 local d
-local a = 0x17
-local p,q = 0x03,0x02
+local a = self.cfg
+local r = gpio
+local q = r+self.clk
+local p = q+0x01
 local BE = bit32.extract
 local FP = fa.pio
-
 	FP(a,p)FP(a,q)
 	for i=1,#tbl do
 		d = tbl[i]
-		FP(a,0)FP(a,BE(d,0)+q)
-		FP(a,0)FP(a,BE(d,1)+q)
-		FP(a,0)FP(a,BE(d,2)+q)
-		FP(a,0)FP(a,BE(d,3)+q)
-		FP(a,0)FP(a,BE(d,4)+q)
-		FP(a,0)FP(a,BE(d,5)+q)
-		FP(a,0)FP(a,BE(d,6)+q)
-		FP(a,0)FP(a,BE(d,7)+q)
+		FP(a,r)FP(a,BE(d,0)+q)
+		FP(a,r)FP(a,BE(d,1)+q)
+		FP(a,r)FP(a,BE(d,2)+q)
+		FP(a,r)FP(a,BE(d,3)+q)
+		FP(a,r)FP(a,BE(d,4)+q)
+		FP(a,r)FP(a,BE(d,5)+q)
+		FP(a,r)FP(a,BE(d,6)+q)
+		FP(a,r)FP(a,BE(d,7)+q)
 	end
-	FP(a,0)FP(a,q)FP(a,p)
+	FP(a,r)FP(a,q)FP(a,p)
 end
 
 --public
-function SlibRGB57wTM1640:setup(bright)
+function SlibRGB57wTM1640:setup(bright,gpio,cfg,clk)
+self.cfg  = cfg or 0x1F
+self.clk  = clk or 0x02
+self.gpio = gpio or 0x00
 self:writeCmd(0x40) -- auto increment
 self:cls()
 self:setBright(bright)
@@ -57,8 +63,8 @@ function SlibRGB57wTM1640:cls()
 self:writeCmd(0xc0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0) --clear
 end
 
-function SlibRGB57wTM1640:write(bitmap)
-	self:writeCmd(0xc0,table.unpack(bitmap))
+function SlibRGB57wTM1640:write(bitmap,gpio)
+	self:writeCmd({0xc0,table.unpack(bitmap)},gpio)
 end
 
 function SlibRGB57wTM1640:setBright(bright)
