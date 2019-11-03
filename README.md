@@ -103,10 +103,10 @@ VSS(3,6)| VSS   | ---  |
 
 関数 | 説明  
 --- | ---  
-SlibRGB57wTM1640:setup(bright,gpio,cfg,clk) | **TM1640の初期設定を行い、LEDの表示をクリアして、明るさを設定します。**<BR>**bright:** LEDの明るさを 0～8で設定します。0で消灯、8で最大輝度です。<BR>**gpio:** LED通信に使わない端子の1/0状態を指定します。<BR>ピンアサインは fa.pio()に準じます。省略時は0x00です。<BR>**cfg:** LED通信時の端子のIO設定を変更します。<BR>ピンアサインは fa.pio()に準じます。省略時は0x1Fです。<BR>**clk:** SCLK信号の割り当てを変更します。<BR>ピンアサインは fa.pio()に準じます。省略時は0x02です。  
-SlibRGB57wTM1640:write(bitmap,gpio) |**ビットマップデータをLEDに転送します***<BR>**bitmap:** ビットマップデータ<BR>**gpio:** LED通信に使わない端子の1/0状態を指定します。<BR>ピンアサインは fa.pio()に準じます。省略時は前回の値を維持します。
+SlibRGB57wTM1640:setup(bright,gpio,cfg,clk) | **TM1640の初期設定を行い、LEDの表示をクリアして、明るさを設定します**<BR>**bright:** LEDの明るさを 0～8で設定します。0で消灯、8で最大輝度です。<BR>**gpio:** LED通信に使わない端子の1/0状態を指定します。<BR>ピンアサインは fa.pio()に準じます。省略時は0x00です。<BR>**cfg:** LED通信時の端子のIO設定を変更します。<BR>ピンアサインは fa.pio()に準じます。省略時は0x1Fです。<BR>**clk:** SCLK信号の割り当てを変更します。<BR>ピンアサインは fa.pio()に準じます。省略時は0x02です。  
+SlibRGB57wTM1640:write(bitmap,gpio) |**ビットマップデータをLEDに転送します**<BR>**bitmap:** ビットマップデータ<BR>**gpio:** LED通信に使わない端子の1/0状態を指定します。<BR>ピンアサインは fa.pio()に準じます。省略時は前回の値を維持します。
 SlibRGB57wTM1640:cls() | **LEDの表示をクリアします**
-SlibRGB57wTM1640:setBright(bright)|LEDの明るさを設定します。**<BR>**bright:** LEDの明るさを 0～8で設定します。0で消灯、8で最大輝度です。
+SlibRGB57wTM1640:setBright(bright)|**LEDの明るさを設定します**<BR>**bright:** LEDの明るさを 0～8で設定します。0で消灯、8で最大輝度です。
 
 
 ## サンプルコード  
