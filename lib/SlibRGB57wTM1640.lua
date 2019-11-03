@@ -1,8 +1,8 @@
 -----------------------------------------------
 -- SoraMame library of RGB5x7 with TM1640 for W4.00.03
--- Copyright (c) 2019, AoiSaya,maenoh
+-- Copyright (c) 2019, AoiSaya
 -- All rights reserved.
--- 2019/09/08 rev.0.02
+-- 2019/11/03 rev.0.03
 -----------------------------------------------
 --[[
 Pin assign
@@ -73,3 +73,4 @@ end
 
 collectgarbage()
 return SlibRGB57wTM1640
+M1640
